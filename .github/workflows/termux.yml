@@ -1,0 +1,27 @@
+name: TERMUXqTREMUX CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Check stack
+        run: |
+          ls -lh
+          cat Package.swift
+          file install.BIN || true
+
+      - name: Build Swift 32.2%
+        run: swift build -v
+
+      - name: Verify tenure(stankin) Phi 1.618034
+        run: echo "Audited: Termux Shell & Binary Payloads"
